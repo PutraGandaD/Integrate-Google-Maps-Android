@@ -11,7 +11,7 @@ v0.1
 - [x] Using Fragment for Displaying Maps for better flexibility in most use cases (example: having navbar with multiple menu)
 - [x] Added simple animations for zoom in when fragment/activity launched 
 
-WORK IN PROGRESS
-[ ] Getting current locations from user
-[ ] Custom marker icon
-[ ] Custom infowindow (tried for over 2 hours , and after reading Google official Docs, it's very hard)
+## WORK IN PROGRESS
+Getting current locations from user
+Custom marker icon
+Custom infowindow (tried for over 2 hours , and after reading Google official Docs, it's very hard)
