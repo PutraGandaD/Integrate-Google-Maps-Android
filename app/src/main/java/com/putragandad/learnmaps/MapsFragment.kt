@@ -1,12 +1,18 @@
 package com.putragandad.learnmaps
 
+import android.content.pm.PackageManager
+import android.location.Location
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.PackageManagerCompat
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -17,7 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment() {
 
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var locationArrayList : ArrayList<MapsData>? = null
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -29,9 +35,13 @@ class MapsFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        for (i in locationArrayList!!.indices) {
+            googleMap.addMarker(MarkerOptions().position(LatLng(locationArrayList!![i].latitude, locationArrayList!![i].longitude)).title(locationArrayList!![i].address))
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(locationArrayList!![2].latitude, locationArrayList!![2].longitude), 15.0f))
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(14.0f), 2000, null)
+            googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+        }
     }
 
     override fun onCreateView(
@@ -44,7 +54,14 @@ class MapsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+
+        locationArrayList = ArrayList()
+        locationArrayList!!.add(MapsData(-2.961700781169533, 104.74892014785055, "Location 1"))
+        locationArrayList!!.add(MapsData(-2.9831295839366834, 104.74686021144464, "Location 2"))
+        locationArrayList!!.add(MapsData(-2.9814152950450232, 104.77484101429141, "Location 3"))
     }
+
 }
