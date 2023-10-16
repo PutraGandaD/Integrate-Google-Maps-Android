@@ -37,7 +37,7 @@ class MapsFragment : Fragment() {
          */
 
         for (i in locationArrayList!!.indices) {
-            googleMap.addMarker(MarkerOptions().position(LatLng(locationArrayList!![i].latitude, locationArrayList!![i].longitude)).title(locationArrayList!![i].address))
+            googleMap.addMarker(MarkerOptions().position(LatLng(locationArrayList!![i].latitude, locationArrayList!![i].longitude)).title(locationArrayList!![i].placesName).snippet(locationArrayList!![i].placesAddress))
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(locationArrayList!![2].latitude, locationArrayList!![2].longitude), 15.0f))
             googleMap.animateCamera(CameraUpdateFactory.zoomTo(14.0f), 2000, null)
             googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
@@ -59,9 +59,9 @@ class MapsFragment : Fragment() {
         mapFragment?.getMapAsync(callback)
 
         locationArrayList = ArrayList()
-        locationArrayList!!.add(MapsData(-2.961700781169533, 104.74892014785055, "Location 1"))
-        locationArrayList!!.add(MapsData(-2.9831295839366834, 104.74686021144464, "Location 2"))
-        locationArrayList!!.add(MapsData(-2.9814152950450232, 104.77484101429141, "Location 3"))
+        locationArrayList!!.add(MapsData(-2.961700781169533, 104.74892014785055, "Location 1", "Jalan Taqwa 1"))
+        locationArrayList!!.add(MapsData(-2.9831295839366834, 104.74686021144464, "Location 2", "Jalan Taqwa 2"))
+        locationArrayList!!.add(MapsData(-2.9814152950450232, 104.77484101429141, "Location 3", "Jalan Taqwa 3"))
     }
 
 }
