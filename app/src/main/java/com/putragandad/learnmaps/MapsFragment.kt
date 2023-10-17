@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.PackageManagerCompat
@@ -19,6 +20,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment() {
@@ -41,7 +43,13 @@ class MapsFragment : Fragment() {
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(locationArrayList!![2].latitude, locationArrayList!![2].longitude), 15.0f))
             googleMap.animateCamera(CameraUpdateFactory.zoomTo(14.0f), 2000, null)
             googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+            googleMap.setOnMarkerClickListener {
+                Toast.makeText(context, "Clicked! " + it.snippet + " " + it.title , Toast.LENGTH_SHORT).show()
+                it.showInfoWindow()
+                true
+            }
         }
+
     }
 
     override fun onCreateView(
@@ -65,3 +73,4 @@ class MapsFragment : Fragment() {
     }
 
 }
+
